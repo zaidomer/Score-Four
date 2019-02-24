@@ -28,11 +28,11 @@ class Select extends JFrame {
         gameBoard = blankGameBoard(gameBoard, intGameBoardSize);
         do{
             if(goesFirst == 0){
-                //playerChoice();
-                //comupterChoice();
+                gameBoard = playerChoice(gameBoard, intGameBoardSize);
+                gameBoard = comupterChoice(gameBoard, intGameBoardSize);
             } else {
-                //comupterChoice();
-                //playerChoice();
+                gameBoard = comupterChoice(gameBoard, intGameBoardSize);
+                gameBoard = playerChoice(gameBoard, intGameBoardSize);
             }
             gameOver = checkGameOver();
         }while(gameOver == false);
@@ -43,22 +43,58 @@ class Select extends JFrame {
             for(int j = 0; j < gameBoardSize; j++){
                 for(int k = 0; k < gameBoardSize; k++){
                     gameBoard[i][j][k] = "[]";
+                }
+            }
+        }
+        printBoard(gameBoard);
+        return gameBoard;
+    }
+
+    public static void printBoard(String[][][] gameBoard) {
+        for(int i = 0; i < gameBoard.length; i++){
+            System.out.println("Z" + i);
+            for(int j = 0; j < gameBoard.length; j++){
+                for(int k = 0; k < gameBoard.length; k++){
                     System.out.print(gameBoard[i][j][k]);
                 }
                 System.out.println();
             }
             System.out.println();
-            System.out.println();
         }
+        System.out.println("////////////////////////////////////////////////");
+    }
+
+    public static String[][][] playerChoice(String[][][] gameBoard, int gameBoardSize) {
+        int zCoordiante = Integer.parseInt(JOptionPane.showInputDialog("Please enter the row (from a birds eye view) or Z coordiante of your move, between 0 and " + (gameBoardSize-1)));
+        int column = Integer.parseInt(JOptionPane.showInputDialog("Please enter the column, between 0 and " + (gameBoardSize-1)));
+        int row = findRow(gameBoard, gameBoardSize, column, zCoordiante);
+        gameBoard[zCoordiante][row][column] = "X ";
+        printBoard(gameBoard);
         return gameBoard;
     }
 
-    public static void playerChoice() {
-        System.out.println("hi");
+    public static int findRow(String[][][] gameBoard, int gameBoardSize, int column, int zCoordiante) {
+        int row = -1;
+        for(int i = gameBoardSize-1; i > 0; i--){
+            if((((gameBoard[zCoordiante][i][column]).equals("[]")) && (row == -1))) {
+                row = i;
+            }
+        }
+        return row;
     }
 
-    public static void comupterChoice() {
-        System.out.println("hi");
+    public static String[][][] comupterChoice(String[][][] gameBoard, int gameBoardSize) {
+        int column;
+        int zCoordiante;
+        int row; 
+
+        // Temporary random coordiantes
+        column = (int)(Math.random() * gameBoardSize + 0);
+        zCoordiante = (int)(Math.random() * gameBoardSize + 0);
+        row = findRow(gameBoard, gameBoardSize, column, zCoordiante);
+        gameBoard[zCoordiante][row][column] = "O ";
+        printBoard(gameBoard);
+        return gameBoard;
     }
     
     public static boolean checkGameOver() {
