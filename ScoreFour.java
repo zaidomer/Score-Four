@@ -148,7 +148,7 @@ class Select extends JFrame {
             gameOver = true; //from top left to bottom right 
           }
         }
-        for(int column = gameBoard.length-4; column >= 3; column--){
+        for(int column = gameBoard.length-1; column >= 3; column--){
           if((gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column-1]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+2][column-2]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column-3]))
