@@ -88,9 +88,9 @@ class Select extends JFrame {
   }
   
   public static int findRow(String[][][] gameBoard, int gameBoardSize, int column, int zCoordiante) {
-    int row = 0;
+    int row = -1;
     boolean found = false;
-    for(int i = gameBoardSize-1; i > 0; i--){
+    for(int i = gameBoardSize-1; i >= 0; i--){
       if((((gameBoard[zCoordiante][i][column]).equals("[]")) && (found == false))) {
         row = i;
         found = true;
@@ -105,9 +105,11 @@ class Select extends JFrame {
     int row; 
     
     // Temporary random coordiantes
-    column = (int)(Math.random() * gameBoardSize + 0);
-    zCoordiante = (int)(Math.random() * gameBoardSize + 0);
-    row = findRow(gameBoard, gameBoardSize, column, zCoordiante);
+    do{
+      column = (int)(Math.random() * gameBoardSize + 0);
+      zCoordiante = (int)(Math.random() * gameBoardSize + 0);
+      row = findRow(gameBoard, gameBoardSize, column, zCoordiante);
+    }while(row == -1); // makes sure ai doesnt select filled column
     gameBoard[zCoordiante][row][column] = "O ";
     printBoard(gameBoard);
     return gameBoard;
@@ -116,28 +118,31 @@ class Select extends JFrame {
   public static boolean checkGameOver(String[][][] gameBoard) {
     boolean gameOver =  false;
     
-    // Multi-dimensional Diagonal Win
-    for(int i = 0; i < gameBoard.length-2; i++) {
-      if((gameBoard[i][gameBoard.length-1-i][i].equals(gameBoard[i+1][gameBoard.length-1-(i+1)][i+1])) && (gameBoard[i][i][i] != "[]")){
-        gameOver = true;
-      }
-    }
-    
-    //Vertical, horixontal win check, accross 1 z dimension
+    // Vertical, horizontal win check
     for(int i = 0; i < gameBoard.length; i++){
       for(int j = 0; j < gameBoard.length; j++){
         for(int k = 0; k <= gameBoard.length-4; k++){
-          if((gameBoard[i][k][j].equals(gameBoard[i][k+1][j])) && (gameBoard[i][k][j].equals(gameBoard[i][k+2][j])) && (gameBoard[i][k][j].equals(gameBoard[i][k+3][j])) && !(gameBoard[i][k][j].equals("[]"))){
+          if((gameBoard[i][k][j].equals(gameBoard[i][k+1][j])) 
+          && (gameBoard[i][k][j].equals(gameBoard[i][k+2][j])) 
+          && (gameBoard[i][k][j].equals(gameBoard[i][k+3][j])) 
+          && !(gameBoard[i][k][j].equals("[]"))){
             gameOver = true; // vertical win
-          }else if((gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) && !(gameBoard[i][j][k].equals("[]"))){
+          }else if((gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) 
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) 
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) 
+          && !(gameBoard[i][j][k].equals("[]"))){
             gameOver = true; // horizontal win
+          } else if((gameBoard[k][j][i].equals(gameBoard[k+1][j][i])) 
+          && (gameBoard[k][j][i].equals(gameBoard[k+2][j][i])) 
+          && (gameBoard[k][j][i].equals(gameBoard[k+3][j][i])) 
+          && !(gameBoard[k][j][i].equals("[]"))){
+            gameOver = true; // horizontal win accross multiple z dimensions
           }
-
         }
       }
     }
     
-    //Diagonal win (accross 1 z dimension)
+    //Diagonal win
     for(int zCoordiante = 0; zCoordiante < gameBoard.length; zCoordiante++){
       for(int row = 0; row <= gameBoard.length-4; row++){
         for(int column = 0; column <= gameBoard.length-4; column++){
@@ -146,6 +151,12 @@ class Select extends JFrame {
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column+3])) 
           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from top left to bottom right 
+          } else if((zCoordiante <= gameBoard.length-4) 
+          &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row+1][column+1])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row+2][column+2])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row+3][column+3])) 
+          && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from top left to bottom right multi-dimensional
           }
         }
         for(int column = gameBoard.length-1; column >= 3; column--){
@@ -154,6 +165,27 @@ class Select extends JFrame {
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column-3]))
            && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from bottom left to top right
+          } else if((zCoordiante >= 3) 
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-1][row+1][column-1]))
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-2][row+2][column-2]))
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-3][row+3][column-3]))
+           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from bottom left to top right multi-dimensional 
+          } 
+        }
+        for(int column = 0; column < gameBoard.length; column++){
+          if((zCoordiante <= gameBoard.length-4) 
+           &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row+1][column])) 
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row+2][column])) 
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row+3][column])) 
+           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from top left to bottom right multi-dimensional, but along 1 column
+          } else if((zCoordiante >= 3) 
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-1][row+1][column]))
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-2][row+2][column]))
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-3][row+3][column]))
+           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from bottom left to top right multi-dimensional, but along 1 column 
           }
         }
       }
