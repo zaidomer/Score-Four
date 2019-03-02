@@ -115,7 +115,6 @@ class Select extends JFrame {
   
   public static boolean checkGameOver(String[][][] gameBoard) {
     boolean gameOver =  false;
-    int numConnected = 0;
     
     // Multi-dimensional Diagonal Win
     for(int i = 0; i < gameBoard.length-2; i++) {
@@ -123,7 +122,6 @@ class Select extends JFrame {
         gameOver = true;
       }
     }
-    numConnected = 0;
     
     //Vertical, horixontal win check, accross 1 z dimension
     for(int i = 0; i < gameBoard.length; i++){
@@ -140,12 +138,23 @@ class Select extends JFrame {
     }
     
     //Diagonal win (accross 1 z dimension)
-    for(int i = 0; i < gameBoard.length; i++){
-      for(int j = 0; j <= gameBoard.length-4; j++){
-        for(int k = 0; k <= gameBoard.length-4; k++){
-          if((gameBoard[i][j][k].equals(gameBoard[i][j+1][k+1])) && (gameBoard[i][j][k].equals(gameBoard[i][j+2][k+2])) && (gameBoard[i][j][k].equals(gameBoard[i][j+3][k+3])) && (!(gameBoard[i][j][k].equals("[]")))){
-            gameOver = true;
-          }  
+    for(int zCoordiante = 0; zCoordiante < gameBoard.length; zCoordiante++){
+      for(int row = 0; row <= gameBoard.length-4; row++){
+        for(int column = 0; column <= gameBoard.length-4; column++){
+          if((gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column+1])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+2][column+2])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column+3])) 
+          && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from top left to bottom right 
+          }
+        }
+        for(int column = gameBoard.length-4; column >= 3; column--){
+          if((gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column-1]))
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+2][column-2]))
+           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column-3]))
+           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from bottom left to top right
+          }
         }
       }
     }
