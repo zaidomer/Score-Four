@@ -35,14 +35,16 @@ class Select extends JFrame {
         if(gameOver==false) {
           gameBoard = comupterChoice(gameBoard, intGameBoardSize);
           winner = " The computer wins!";
+          gameOver = checkGameOver(gameBoard);
         }
       } else {
         gameBoard = comupterChoice(gameBoard, intGameBoardSize);
+        winner = " The computer wins!";
         gameOver = checkGameOver(gameBoard);
-        winner = " You win!";
         if(gameOver == false) {
           gameBoard = playerChoice(gameBoard, intGameBoardSize);
-          winner = " The computer wins!";
+          winner = " You win!";
+          gameOver = checkGameOver(gameBoard);
         }
       }
       
@@ -123,29 +125,31 @@ class Select extends JFrame {
     }
     numConnected = 0;
     
-    // Vertical win
+    //Vertical, horixontal win check, accross 1 z dimension
     for(int i = 0; i < gameBoard.length; i++){
       for(int j = 0; j < gameBoard.length; j++){
         for(int k = 0; k <= gameBoard.length-4; k++){
-          if((gameBoard[i][k][j].equals(gameBoard[i+1][k+1][j])) && (gameBoard[i][k][j].equals(gameBoard[i][k+2][j])) && (gameBoard[i][k][j].equals(gameBoard[i][k+3][j])) && !(gameBoard[i][k][j].equals("[]"))){
-            gameOver = true;
+          if((gameBoard[i][k][j].equals(gameBoard[i][k+1][j])) && (gameBoard[i][k][j].equals(gameBoard[i][k+2][j])) && (gameBoard[i][k][j].equals(gameBoard[i][k+3][j])) && !(gameBoard[i][k][j].equals("[]"))){
+            gameOver = true; // vertical win
+          }else if((gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) && !(gameBoard[i][j][k].equals("[]"))){
+            gameOver = true; // horizontal win
           }
-        }
-      }
-    }
-    
-    // Horizontal win (accross 1 z dimension)
-    for(int i = 0; i < gameBoard.length; i++){
-      for(int j = 0; j < gameBoard.length ; j++){
-        for(int k = 0; k <=gameBoard.length - 4; k++){
-          if((gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) && !(gameBoard[i][j][k].equals("[]"))){
-            gameOver = true;
-          }
+
         }
       }
     }
     
     //Diagonal win (accross 1 z dimension)
+    for(int i = 0; i < gameBoard.length; i++){
+      for(int j = 0; j <= gameBoard.length-4; j++){
+        for(int k = 0; k <= gameBoard.length-4; k++){
+          if((gameBoard[i][j][k].equals(gameBoard[i][j+1][k+1])) && (gameBoard[i][j][k].equals(gameBoard[i][j+2][k+2])) && (gameBoard[i][j][k].equals(gameBoard[i][j+3][k+3])) && (!(gameBoard[i][j][k].equals("[]")))){
+            gameOver = true;
+          }  
+        }
+      }
+    }
+
     return gameOver;
   }
 }
