@@ -100,16 +100,67 @@ class Select extends JFrame {
   }
   
   public static String[][][] comupterChoice(String[][][] gameBoard, int gameBoardSize) {
-    int column;
-    int zCoordiante;
-    int row; 
+    int column = 0;
+    int zCoordiante = 0;
+    int row = -1; 
     
+    //Vertical 
+    for(int i = 0; i < gameBoard.length; i++){
+      for(int j = 0; j < gameBoard.length; j++){
+        for(int k = 0; k <= gameBoard.length-4; k++){
+          // Vertical Placement
+          if((gameBoard[i][k][j].equals("[]") 
+          && (gameBoard[i][k+1][j].equals(gameBoard[i][k+2][j])) 
+          && (gameBoard[i][k+1][j].equals(gameBoard[i][k+3][j])) 
+          && !(gameBoard[i][k+1][j].equals("[]")))){
+            zCoordiante = i;
+            column = j;
+            row = k;
+          
+          // Horizontal Placement Condition "[]XXX" or "[]OOO"
+          }else if((gameBoard[i][j][k].equals("[]") 
+          && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+2])) 
+          && (gameBoard[i][j][k+2].equals(gameBoard[i][j][k+3])) 
+          && !(gameBoard[i][j][k+3].equals("[]")))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+          
+          // Horizontal Placement Condition "XXX[]" or "OOO[]"
+          }else if((gameBoard[i][j][k+3].equals("[]") 
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) 
+          && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+2])) 
+          && !(gameBoard[i][j][k].equals("[]")))){
+            zCoordiante = i;
+            column = k+3;
+            row = j;
+          
+          // Horizontal Placement Condition "X[]XX" or "O[]OO"
+          }else if((gameBoard[i][j][k+1].equals("[]") 
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) 
+          && (gameBoard[i][j][k+2].equals(gameBoard[i][j][k+3])) 
+          && !(gameBoard[i][j][k].equals("[]")))){
+            zCoordiante = i;
+            column = k+1;
+            row = j;
+          }
+           //else if((gameBoard[k][j][i].equals(gameBoard[k+1][j][i])) 
+          // && (gameBoard[k][j][i].equals(gameBoard[k+2][j][i])) 
+          // && (gameBoard[k][j][i].equals(gameBoard[k+3][j][i])) 
+          // && !(gameBoard[k][j][i].equals("[]"))){
+          //   gameOver = true; // horizontal win accross multiple z dimensions
+          // }
+        }
+      }
+    }
+    
+
     // Temporary random coordiantes
-    do{
+    while(row == -1){
       column = (int)(Math.random() * gameBoardSize + 0);
       zCoordiante = (int)(Math.random() * gameBoardSize + 0);
       row = findRow(gameBoard, gameBoardSize, column, zCoordiante);
-    }while(row == -1); // makes sure ai doesnt select filled column
+    } // makes sure ai doesnt select filled column
     gameBoard[zCoordiante][row][column] = "O ";
     printBoard(gameBoard);
     return gameBoard;
