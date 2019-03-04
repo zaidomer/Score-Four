@@ -107,9 +107,80 @@ class Select extends JFrame {
 
     for(int i = 0; i < gameBoard.length; i++){
       for(int j = 0; j < gameBoard.length; j++){
-        for(int k = 0; k <= gameBoard.length-4; k++){
+        for(int k = 0; k < gameBoard.length; k++){
+          //2 in a row
+          // Horizontal "[]X[]X or []O[]O"
+          if((gameBoard[i][j][k].equals("[]")) 
+          && (k <= gameBoard.length-4)
+          && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+3])) 
+          && (gameBoard[i][j][k+2].equals("[]")) 
+          && !(gameBoard[i][j][k+1].equals("[]"))
+          && (winComboFound == false)
+          && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
+            zCoordiante = i;
+            column = k+2;
+            row = j;
+
+          // Horizontal "X[]X[] or O[]O[]"
+          }else if((k <= gameBoard.length-4)
+          && (gameBoard[i][j][k+1].equals("[]")) 
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) 
+          && (gameBoard[i][j][k+3].equals("[]")) 
+          && !(gameBoard[i][j][k].equals("[]"))
+          && (winComboFound == false)
+          && (j == findRow(gameBoard, gameBoard.length, k+3, i))){
+            zCoordiante = i;
+            column = k+3;
+            row = j;
+
+          // Horizontal Placement Condition "[]XX" or "[]OO" 
+          }else if((gameBoard[i][j][k].equals("[]")) 
+          && (k <= gameBoard.length-3)
+          && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+2])) 
+          && !(gameBoard[i][j][k+1].equals("[]"))
+          && (winComboFound == false)
+          && (j == findRow(gameBoard, gameBoard.length, k, i))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+
+          // Horizontal Placement Condition "XX[]" or "OO[]" 
+          } else if((k <= gameBoard.length-3) 
+          && (gameBoard[i][j][k+2].equals("[]")
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) 
+          && !(gameBoard[i][j][k].equals("[]"))
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
+            zCoordiante = i;
+            column = k+2;
+            row = j;
+            
+          // Horizontal Placement Condition "X[][]X" or "O[][]O" 
+          } else if((k <= gameBoard.length-4) 
+          && (gameBoard[i][j][k+2].equals("[]")
+          && (gameBoard[i][j][k+1].equals("[]")
+          && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) 
+          && !(gameBoard[i][j][k].equals("[]"))
+          && (winComboFound == false)))
+          && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
+            zCoordiante = i;
+            column = k+2;
+            row = j;
+            
           // Vertical Placement
+          }else if((gameBoard[i][k][j].equals("[]") 
+          && (k <= gameBoard.length-3)
+          && (gameBoard[i][k+1][j].equals(gameBoard[i][k+2][j])) 
+          && !(gameBoard[i][k+1][j].equals("[]")))
+          && (winComboFound == false)){
+            zCoordiante = i;
+            column = j;
+            row = k;
+          } 
+          //3 in a row
+          // Vertical
           if((gameBoard[i][k][j].equals("[]") 
+          && (k <= gameBoard.length-4)
           && (gameBoard[i][k+1][j].equals(gameBoard[i][k+2][j])) 
           && (gameBoard[i][k+1][j].equals(gameBoard[i][k+3][j])) 
           && !(gameBoard[i][k+1][j].equals("[]")))
@@ -123,10 +194,12 @@ class Select extends JFrame {
           
           // Horizontal Placement Condition "[]XXX" or "[]OOO"
           }else if((gameBoard[i][j][k].equals("[]") 
+          && (k <= gameBoard.length-4)
           && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+2])) 
           && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+3])) 
           && !(gameBoard[i][j][k+1].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, k, i))){
             zCoordiante = i;
             column = k;
             row = j;
@@ -135,11 +208,13 @@ class Select extends JFrame {
             }
 
           // Horizontal Placement Condition "XXX[]" or "OOO[]"
-          }else if((gameBoard[i][j][k+3].equals("[]") 
+          }else if((k <= gameBoard.length-4) 
+          &&(gameBoard[i][j][k+3].equals("[]")
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) 
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) 
           && !(gameBoard[i][j][k].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, k+3, i))){
             zCoordiante = i;
             column = k+3;
             row = j;
@@ -148,11 +223,13 @@ class Select extends JFrame {
             }
           
           // Horizontal Placement Condition "X[]XX" or "O[]OO"
-          }else if((gameBoard[i][j][k+1].equals("[]") 
+          }else if((k <= gameBoard.length-4)
+          && (gameBoard[i][j][k+1].equals("[]") 
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+2])) 
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) 
           && !(gameBoard[i][j][k].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, k+1, i))){
             zCoordiante = i;
             column = k+1;
             row = j;
@@ -160,24 +237,26 @@ class Select extends JFrame {
               winComboFound = true;
             }
           // Horizontal Placement Condition "XX[]X" or "OO[]O"
-          }else if((gameBoard[i][j][k+2].equals("[]") 
+          }else if((k <= gameBoard.length-4)
+          && (gameBoard[i][j][k+2].equals("[]") 
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) 
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) 
           && !(gameBoard[i][j][k].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
             zCoordiante = i;
             column = k+2;
             row = j;
             if(gameBoard[i][j][k].equals("O ")){
               winComboFound = true;
             }
-
-          // Horizontal Placement Condition "[]XXX" or "[]OOO" Along z dimensions
           }else if((gameBoard[k][j][i].equals("[]") 
+          && (k <= gameBoard.length-4)
           && (gameBoard[k+1][j][i].equals(gameBoard[k+2][j][i])) 
           && (gameBoard[k+1][j][i].equals(gameBoard[k+3][j][i])) 
           && !(gameBoard[k+1][j][i].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, i, k))){
             zCoordiante = k;
             column = i;
             row = j;
@@ -185,11 +264,13 @@ class Select extends JFrame {
               winComboFound = true;
             }
           // Horizontal Placement Condition "XXX[]" or "OOO[]" Along z dimensions
-          }else if((gameBoard[k+3][j][i].equals("[]") 
+          }else if((k <= gameBoard.length-4)
+          && (gameBoard[k+3][j][i].equals("[]")) 
           && (gameBoard[k][j][i].equals(gameBoard[k+1][j][i])) 
           && (gameBoard[k][j][i].equals(gameBoard[k+2][j][i])) 
           && !(gameBoard[k][j][i].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false)
+          && (j == findRow(gameBoard, gameBoard.length, i, k+3))){
             zCoordiante = k+3;
             column = i;
             row = j;
@@ -197,11 +278,13 @@ class Select extends JFrame {
               winComboFound = true;
             }
           // Horizontal Placement Condition "X[]XX" or "O[]OO" Along z dimensions
-          }else if((gameBoard[k+1][j][i].equals("[]") 
+          }else if((k <= gameBoard.length-4)
+          && (gameBoard[k+1][j][i].equals("[]"))
           && (gameBoard[k][j][i].equals(gameBoard[k+2][j][i])) 
           && (gameBoard[k][j][i].equals(gameBoard[k+3][j][i])) 
           && !(gameBoard[k][j][i].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false)
+          && (j == findRow(gameBoard, gameBoard.length, i, k+1))){
             zCoordiante = k+1;
             column = i;
             row = j;
@@ -209,11 +292,13 @@ class Select extends JFrame {
               winComboFound = true;
             }
           // Horizontal Placement Condition "XX[]X" or "OO[]O" Along z dimensions
-          }else if((gameBoard[k+2][j][i].equals("[]") 
+          }else if((k <= gameBoard.length-4)
+          && (gameBoard[k+2][j][i].equals("[]") 
           && (gameBoard[k][j][i].equals(gameBoard[k+1][j][i])) 
           && (gameBoard[k][j][i].equals(gameBoard[k+3][j][i])) 
           && !(gameBoard[k][j][i].equals("[]"))
-          && (winComboFound == false))){
+          && (winComboFound == false))
+          && (j == findRow(gameBoard, gameBoard.length, i, k+2))){
             zCoordiante = k+2;
             column = i;
             row = j;
@@ -267,28 +352,38 @@ class Select extends JFrame {
     
     //Diagonal win
     for(int zCoordiante = 0; zCoordiante < gameBoard.length; zCoordiante++){
-      for(int row = 0; row <= gameBoard.length-4; row++){
+      for(int row = 0; row < gameBoard.length; row++){
         for(int column = 0; column <= gameBoard.length-4; column++){
-          if((gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column+1])) 
+          if((row <= gameBoard.length-4) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column+1])) 
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+2][column+2])) 
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column+3])) 
           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from top left to bottom right 
           } else if((zCoordiante <= gameBoard.length-4) 
-          &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row+1][column+1])) 
+          &&((row <= gameBoard.length-4) 
+          && gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row+1][column+1])) 
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row+2][column+2])) 
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row+3][column+3])) 
           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
-            gameOver = true; //from top left to bottom right multi-dimensional
+            gameOver = true; //from top left to bottom right multi-dimensional, multiple heights
+          } else if((zCoordiante <= gameBoard.length-4) 
+          &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row][column+1])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row][column+2])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row][column+3])) 
+          && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from top left to bottom right multi-dimensional, 1 row height
           }
         }
         for(int column = gameBoard.length-1; column >= 3; column--){
-          if((gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column-1]))
+          if((row <= gameBoard.length-4)
+           &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+1][column-1]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+2][column-2]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante][row+3][column-3]))
            && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from bottom left to top right
-          } else if((zCoordiante >= 3) 
+          } else if((zCoordiante >= 3)
+           && (row <= gameBoard.length-4) 
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-1][row+1][column-1]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-2][row+2][column-2]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-3][row+3][column-3]))
@@ -298,12 +393,14 @@ class Select extends JFrame {
         }
         for(int column = 0; column < gameBoard.length; column++){
           if((zCoordiante <= gameBoard.length-4) 
+           &&(row <= gameBoard.length-4)
            &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row+1][column])) 
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row+2][column])) 
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row+3][column])) 
            && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from top left to bottom right multi-dimensional, but along 1 column
           } else if((zCoordiante >= 3) 
+           && (row <= gameBoard.length-4)
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-1][row+1][column]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-2][row+2][column]))
            && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-3][row+3][column]))
