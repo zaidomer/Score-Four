@@ -104,6 +104,7 @@ class Select extends JFrame {
     int zCoordiante = 0;
     int row = -1; 
     boolean winComboFound = false;
+    boolean defendThree = false;
 
     for(int i = 0; i < gameBoard.length; i++){
       for(int j = 0; j < gameBoard.length; j++){
@@ -116,6 +117,7 @@ class Select extends JFrame {
           && (gameBoard[i][j][k+2].equals("[]")) 
           && !(gameBoard[i][j][k+1].equals("[]"))
           && (winComboFound == false)
+          && (defendThree == false)
           && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
             zCoordiante = i;
             column = k+2;
@@ -128,6 +130,7 @@ class Select extends JFrame {
           && (gameBoard[i][j][k+3].equals("[]")) 
           && !(gameBoard[i][j][k].equals("[]"))
           && (winComboFound == false)
+          && (defendThree == false)
           && (j == findRow(gameBoard, gameBoard.length, k+3, i))){
             zCoordiante = i;
             column = k+3;
@@ -139,6 +142,7 @@ class Select extends JFrame {
           && (gameBoard[i][j][k+1].equals(gameBoard[i][j][k+2])) 
           && !(gameBoard[i][j][k+1].equals("[]"))
           && (winComboFound == false)
+          && (defendThree == false)
           && (j == findRow(gameBoard, gameBoard.length, k, i))){
             zCoordiante = i;
             column = k;
@@ -149,7 +153,8 @@ class Select extends JFrame {
           && (gameBoard[i][j][k+2].equals("[]")
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+1])) 
           && !(gameBoard[i][j][k].equals("[]"))
-          && (winComboFound == false))
+          && (winComboFound == false)
+          && (defendThree == false))
           && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
             zCoordiante = i;
             column = k+2;
@@ -157,26 +162,29 @@ class Select extends JFrame {
             
           // Horizontal Placement Condition "X[][]X" or "O[][]O" 
           } else if((k <= gameBoard.length-4) 
-          && (gameBoard[i][j][k+2].equals("[]")
-          && (gameBoard[i][j][k+1].equals("[]")
+          && (gameBoard[i][j][k+2].equals("[]"))
+          && (gameBoard[i][j][k+1].equals("[]"))
           && (gameBoard[i][j][k].equals(gameBoard[i][j][k+3])) 
           && !(gameBoard[i][j][k].equals("[]"))
-          && (winComboFound == false)))
+          && (winComboFound == false)
+          && (defendThree == false)
           && (j == findRow(gameBoard, gameBoard.length, k+2, i))){
             zCoordiante = i;
             column = k+2;
             row = j;
             
-          // Vertical Placement
+          // Vertical Placement (2 in a row)
           }else if((gameBoard[i][k][j].equals("[]") 
           && (k <= gameBoard.length-3)
           && (gameBoard[i][k+1][j].equals(gameBoard[i][k+2][j])) 
           && !(gameBoard[i][k+1][j].equals("[]")))
-          && (winComboFound == false)){
+          && (winComboFound == false)
+          && (defendThree == false)){
             zCoordiante = i;
             column = j;
             row = k;
           } 
+          
           //3 in a row
           // Vertical
           if((gameBoard[i][k][j].equals("[]") 
@@ -188,8 +196,11 @@ class Select extends JFrame {
             zCoordiante = i;
             column = j;
             row = k;
+            System.out.println("qasedcftgyhbjuijkolklpokmnjijhbhygvftrfdredsesxdrtfvgyuhjiokmkjhbgytfcr");
             if(gameBoard[i][k+1][j].equals("O ")){
               winComboFound = true;
+            } else{
+              defendThree = true;
             }
           
           // Horizontal Placement Condition "[]XXX" or "[]OOO"
@@ -205,6 +216,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[i][j][k+1].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
 
           // Horizontal Placement Condition "XXX[]" or "OOO[]"
@@ -220,6 +233,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[i][j][k].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
           
           // Horizontal Placement Condition "X[]XX" or "O[]OO"
@@ -235,6 +250,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[i][j][k].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
           // Horizontal Placement Condition "XX[]X" or "OO[]O"
           }else if((k <= gameBoard.length-4)
@@ -249,6 +266,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[i][j][k].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
           }else if((gameBoard[k][j][i].equals("[]") 
           && (k <= gameBoard.length-4)
@@ -262,6 +281,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[k+1][j][i].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
           // Horizontal Placement Condition "XXX[]" or "OOO[]" Along z dimensions
           }else if((k <= gameBoard.length-4)
@@ -276,6 +297,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[k][j][i].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
           // Horizontal Placement Condition "X[]XX" or "O[]OO" Along z dimensions
           }else if((k <= gameBoard.length-4)
@@ -290,6 +313,8 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[k][j][i].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
           // Horizontal Placement Condition "XX[]X" or "OO[]O" Along z dimensions
           }else if((k <= gameBoard.length-4)
@@ -304,8 +329,16 @@ class Select extends JFrame {
             row = j;
             if(gameBoard[k][j][i].equals("O ")){
               winComboFound = true;
+            } else {
+              defendThree = true;
             }
+
+          // Bottom Left to top right diagonal
+          // }else if(){
+
           }
+
+
         }
       }
     }
