@@ -476,6 +476,13 @@ class Select extends JFrame {
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row][column+3])) 
           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from top left to bottom right multi-dimensional, 1 row height
+          }else if((zCoordiante <= gameBoard.length-4) 
+          &&(column >= 3)
+          &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row][column-1])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row][column-2])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row][column-3])) 
+          && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
+            gameOver = true; //from top right to bottom left multi-dimensional, 1 row height
           }
         }
         for(int column = gameBoard.length-1; column >= 3; column--){
