@@ -12,37 +12,44 @@ public class ScoreFour extends JFrame{
 }
 
 class Select extends JFrame {
-  int goesFirst;
-  String gameBoardSize;
+  int goesFirst = -1;
+  int gameBoardSize = 0;
   boolean gameOver = false;
-  int intGameBoardSize = 0;
   Select(){
     super("Start Menu");
     this.setSize(900, 400);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setResizable(true);
-    goesFirst = JOptionPane.showConfirmDialog(null, "Do you want to go first?");
-    gameBoardSize = JOptionPane.showInputDialog("Please enter the dimension of the gameBoard (one number for all dimensions)");
-    intGameBoardSize = Integer.parseInt(gameBoardSize);
-    String[][][] gameBoard = new String[intGameBoardSize][intGameBoardSize][intGameBoardSize];
-    gameBoard = blankGameBoard(gameBoard, intGameBoardSize);
+    while(goesFirst != 1 && goesFirst != 0){
+      goesFirst = JOptionPane.showConfirmDialog(null, "Do you want to go first?");
+    }
+    
+    while(gameBoardSize < 4){
+      try{
+        gameBoardSize = Integer.parseInt(JOptionPane.showInputDialog("Please enter the dimension of the gameBoard, greater than 3"));
+      }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Please enter an integer value.");
+      }
+    }
+    String[][][] gameBoard = new String[gameBoardSize][gameBoardSize][gameBoardSize];
+    gameBoard = blankGameBoard(gameBoard, gameBoardSize);
     String winner = "";
     do{
       if(goesFirst == 0){
-        gameBoard = playerChoice(gameBoard, intGameBoardSize);
+        gameBoard = playerChoice(gameBoard, gameBoardSize);
         winner = " You win!";
         gameOver = checkGameOver(gameBoard);
         if(gameOver==false) {
-          gameBoard = comupterChoice(gameBoard, intGameBoardSize);
+          gameBoard = comupterChoice(gameBoard, gameBoardSize);
           winner = " The computer wins!";
           gameOver = checkGameOver(gameBoard);
         }
       } else {
-        gameBoard = comupterChoice(gameBoard, intGameBoardSize);
+        gameBoard = comupterChoice(gameBoard, gameBoardSize);
         winner = " The computer wins!";
         gameOver = checkGameOver(gameBoard);
         if(gameOver == false) {
-          gameBoard = playerChoice(gameBoard, intGameBoardSize);
+          gameBoard = playerChoice(gameBoard, gameBoardSize);
           winner = " You win!";
           gameOver = checkGameOver(gameBoard);
         }
