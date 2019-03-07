@@ -537,7 +537,285 @@ class Select extends JFrame {
             } else {
               defendThree = true;
             }
+
+            //Bottom Left to top right, top right placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 4) 
+          && (k >= 3) && (i >= 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j+1][k-1].equals(gameBoard[i-2][j+2][k-2])) 
+          && (gameBoard[i-1][j+1][k-1].equals(gameBoard[i-3][j+3][k-3])) 
+          && !(gameBoard[i-1][j+1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j+1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, second from top right placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 3) && (j >= 1)
+          && (k >= 2) && (k <= gameBoard.length -2)
+          && (i >= 2) && (i <= gameBoard.length -2)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i-1][j+1][k-1])) 
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i-2][j+2][k-2])) 
+          && !(gameBoard[i+1][j-1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, second from bottom left placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 2) && (j >= 2)
+          && (k >= 1) && (k <= gameBoard.length -3)
+          && (i >= 1) && (i <= gameBoard.length-3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j+1][k-1].equals(gameBoard[i+1][j-1][k+1])) 
+          && (gameBoard[i-1][j+1][k-1].equals(gameBoard[i+2][j-2][k+2])) 
+          && !(gameBoard[i-1][j+1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j+1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, bottom left placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j >= 3) 
+          && (k <= gameBoard.length-4)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (i <= gameBoard.length-4)
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i+2][j-2][k+2])) 
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i+3][j-3][k+3])) 
+          && !(gameBoard[i+1][j-1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //top left to bottom right, top left placement accross multiple z dimensions, and multiple heights
+          } else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 4) 
+          && (k <= gameBoard.length - 4)
+          && (i >= 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j+1][k+1].equals(gameBoard[i-2][j+2][k+2])) 
+          && (gameBoard[i-1][j+1][k+1].equals(gameBoard[i-3][j+3][k+3])) 
+          && !(gameBoard[i-1][j+1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j+1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom right to top left, second from top left placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 3) && (j >= 1)
+          && (k >= 1) && (k <= gameBoard.length -3)
+          && (i >= 2) && (i <= gameBoard.length - 2)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i-1][j+1][k+1])) 
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i-2][j+2][k+2])) 
+          && !(gameBoard[i+1][j-1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom right to top left, second from bottom right placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 2) && (j >= 2)
+          && (k >= 2) && (k <= gameBoard.length -2)
+          && (i >= 1) && (i < gameBoard.length - 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j+1][k+1].equals(gameBoard[i+1][j-1][k-1])) 
+          && (gameBoard[i-1][j+1][k+1].equals(gameBoard[i+2][j-2][k-2])) 
+          && !(gameBoard[i-1][j+1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j+1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom right to top left, bottom right placement accross multiple z dimensions, and multiple heights
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j >= 3) && (k >= 3)
+          && (i <= gameBoard.length -4)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i+2][j-2][k-2])) 
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i+3][j-3][k-3])) 
+          && !(gameBoard[i+1][j-1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, top right placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]")) 
+          && (k >= 3) && (i >= 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j][k-1].equals(gameBoard[i-2][j][k-2])) 
+          && (gameBoard[i-1][j][k-1].equals(gameBoard[i-3][j][k-3])) 
+          && !(gameBoard[i-1][j][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, second from top right placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (k >= 2) && (k <= gameBoard.length -2)
+          && (i >= 2) && (i <= gameBoard.length -2)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i-1][j][k-1])) 
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i-2][j][k-2])) 
+          && !(gameBoard[i+1][j-1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, second from bottom left placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (k >= 1) && (k <= gameBoard.length -3)
+          && (i >= 1) && (i <= gameBoard.length-3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j][k-1].equals(gameBoard[i+1][j-1][k+1])) 
+          && (gameBoard[i-1][j][k-1].equals(gameBoard[i+2][j-2][k+2])) 
+          && !(gameBoard[i-1][j][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom Left to top right, bottom left placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (k <= gameBoard.length-4)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (i <= gameBoard.length-4)
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i+2][j-2][k+2])) 
+          && (gameBoard[i+1][j-1][k+1].equals(gameBoard[i+3][j-3][k+3])) 
+          && !(gameBoard[i+1][j-1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //top left to bottom right, top left placement accross multiple z dimensions, and one height
+          } else if((gameBoard[i][j][k].equals("[]"))
+          && (k <= gameBoard.length - 4)
+          && (i >= 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j][k+1].equals(gameBoard[i-2][j][k+2])) 
+          && (gameBoard[i-1][j][k+1].equals(gameBoard[i-3][j][k+3])) 
+          && !(gameBoard[i-1][j][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom right to top left, second from top left placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (k >= 1) && (k <= gameBoard.length -3)
+          && (i >= 2) && (i <= gameBoard.length - 2)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i-1][j][k+1])) 
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i-2][j][k+2])) 
+          && !(gameBoard[i+1][j-1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom right to top left, second from bottom right placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (k >= 2) && (k <= gameBoard.length -2)
+          && (i >= 1) && (i < gameBoard.length - 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i-1][j][k+1].equals(gameBoard[i+1][j-1][k-1])) 
+          && (gameBoard[i-1][j][k+1].equals(gameBoard[i+2][j-2][k-2])) 
+          && !(gameBoard[i-1][j][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i-1][j][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
+
+            //Bottom right to top left, bottom right placement accross multiple z dimensions, and one height
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (k >= 3)
+          && (i <= gameBoard.length -4)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i+2][j-2][k-2])) 
+          && (gameBoard[i+1][j-1][k-1].equals(gameBoard[i+3][j-3][k-3])) 
+          && !(gameBoard[i+1][j-1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i+1][j-1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
           }
+
 
         }
       }
@@ -605,11 +883,10 @@ class Select extends JFrame {
           && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row][column+3])) 
           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from top left to bottom right multi-dimensional, 1 row height
-          }else if((zCoordiante <= gameBoard.length-4) 
-          &&(column >= 3)
-          &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+1][row][column-1])) 
-          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+2][row][column-2])) 
-          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante+3][row][column-3])) 
+          }else if((zCoordiante >= 3)
+          &&(gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-1][row][column+1])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-2][row][column+2])) 
+          && (gameBoard[zCoordiante][row][column].equals(gameBoard[zCoordiante-3][row][column+3])) 
           && (!(gameBoard[zCoordiante][row][column].equals("[]")))){
             gameOver = true; //from top right to bottom left multi-dimensional, 1 row height
           }
