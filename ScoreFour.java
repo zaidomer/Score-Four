@@ -266,7 +266,6 @@ class Select extends JFrame {
             zCoordiante = i;
             column = j;
             row = k;
-            System.out.println("qasedcftgyhbjuijkolklpokmnjijhbhygvftrfdredsesxdrtfvgyuhjiokmkjhbgytfcr");
             if(gameBoard[i][k+1][j].equals("O ")){
               winComboFound = true;
             } else{
@@ -403,9 +402,39 @@ class Select extends JFrame {
               defendThree = true;
             }
 
-          // Bottom Left to top right diagonal
-          // }else if(){
+            //Bottom Left to top right, top left placement
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 4) 
+          && (k >= 3)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i][j+1][k-1].equals(gameBoard[i][j+2][k-2])) 
+          && (gameBoard[i][j+1][k-1].equals(gameBoard[i][j+3][k-3])) 
+          && !(gameBoard[i][j+1][k-1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i][j+1][k-1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
 
+            //Bottom Left to top right, second from top left placement
+          }else if((gameBoard[i][j][k].equals("[]"))
+          && (j <= gameBoard.length - 3) 
+          && (k >= 2)
+          && (findRow(gameBoard, gameBoard.length, k, i) == j)
+          && (gameBoard[i][j-1][k+1].equals(gameBoard[i][j+1][k-1])) 
+          && (gameBoard[i][j-1][k+1].equals(gameBoard[i][j+2][k-2])) 
+          && !(gameBoard[i][j-1][k+1].equals("[]"))){
+            zCoordiante = i;
+            column = k;
+            row = j;
+            if(gameBoard[i][j-1][k+1].equals("O ")){
+              winComboFound = true;
+            } else {
+              defendThree = true;
+            }
           }
 
 
