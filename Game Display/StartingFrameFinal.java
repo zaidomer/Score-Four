@@ -1,10 +1,8 @@
-/** 
- * this template can be used for a start menu
- * for your final project
- * get inputs - implement zaids code for x and z
- * make menu
- * draw added pieces
- **/
+/* Selection Sort method
+ * @desc displays button clicks, is ONLY a basic input/output display
+ * @author Charles Ahn
+ * @version March 03th 2019
+ */
 
 
 //Imports
@@ -21,23 +19,30 @@ import java.io.File;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-class StartingFrameO extends JFrame { 
-  static JFrame frame;
+class StartingFrameFinal extends JFrame { 
+  //Declare Variables
+  static final int ZERO = 0;
+  static final int EXTERNALPANELS = 4;
+  static final int REPEAT = 4;
+  static final int COUNTERSTART = 0;
+  static final int COORDINATEX = 0;
+  static final int COORDINATEY = 0;
   static int panelNumber;
   static int row;
   static int column;
-  static boolean played = false;
-  static BufferedImage overlayGame;
   static int sizeBoxPixels;
   static int arraySize;
-  static JButton buttonsMain[][];
-  static JButton buttonsSide[][][];
-  static GraphicsPanel canvas; 
-  static JPanel buttonForm;
-  static JPanel viewForm[] = new JPanel[4];; 
-  static boolean computerTurn = false;
   static int layer[][];
   static int layersUnderButtons;
+  static BufferedImage overlayGame;
+  static JButton buttonsMain[][];
+  static JButton buttonsSide[][][];
+  static JFrame frame;
+  static GraphicsPanel canvas; 
+  static JPanel buttonForm;
+  static JPanel viewForm[] = new JPanel[4];
+  static boolean played = false;
+  static boolean computerTurn = false;
   //Main method starts this application
   public static void main(String[] args) { 
     //Setup frame
@@ -48,26 +53,36 @@ class StartingFrameO extends JFrame {
     //Graphics Panel
     canvas = new GraphicsPanel();
     canvas.setLayout(null);
-    
-    //Icon
+    //Icon for frame
     ImageIcon img = new ImageIcon("coin.png");
     frame.setIconImage(img.getImage());
-    //Set array
-    arraySize = 4;
+    //Setup array
+    arraySize = 10;
     sizeBoxPixels = arraySize*50;
     buttonForm = new JPanel();
     buttonForm.setLayout(new GridLayout(arraySize,arraySize));
     //Set up external panels
-    for(int k = 0; k < 4; k++)
+    for(int k = COUNTERSTART; k < EXTERNALPANELS; k++)
     {
       viewForm[k] = new JPanel();
       viewForm[k].setLayout(new GridLayout(arraySize,arraySize)); 
     }
+    //Setup height array tracker
+    layer = new int[arraySize][arraySize];
+    buttonDrawer();
+    //Load overlay image
+    try 
+    {                
+      overlayGame = ImageIO.read(new File("OverlayGame.png"));
+    } catch (IOException ex){} 
+    frame.add(canvas);
+    frame.setVisible(true);
+  }
+  public static void buttonDrawer()
+  {
     //Button sizer
     buttonsMain = new JButton[arraySize][arraySize];
     buttonsSide = new JButton[arraySize][arraySize][4];
-    //Setup height array tracker
-    layer = new int[arraySize][arraySize];
     //Create button field
     for(int f = 0; f < 4; f++) 
     {
@@ -113,35 +128,38 @@ class StartingFrameO extends JFrame {
       canvas.add(viewForm[d]);
       viewForm[d].setVisible(true);
     }
-    //Load overlay image
-    try 
-    {                
-      overlayGame = ImageIO.read(new File("OverlayGame.png"));
-    } catch (IOException ex){} 
-    frame.add(canvas);
-    frame.setVisible(true);
   }
-  //Button Class
+  /* Button Listener Class
+   * @desc sort words through  array from list of ten numbers
+   * @author Charles Ahn
+   * @version February 12th 2019
+   * @param buttons
+   * @return where clicks came from
+   */
   static class buttonListener implements ActionListener
   {
     public void actionPerformed(ActionEvent event)
     { 
-      canvas.repaint();
-      for (int i = 0; i < arraySize; i++) 
+      //Loop through all the buttons
+      for (int i = COUNTERSTART; i < arraySize; i++) 
       {
-        for (int u = 0; u < arraySize; u++) 
+        for (int u = COUNTERSTART; u < arraySize; u++) 
         {
-          if(event.getSource()== buttonsMain[i][u]) //gameButtons[i][j] was clicked
+          //Find where button was clicked on the grid
+          if(event.getSource()== buttonsMain[i][u])
           {
             row = i;
             column = u;
             played = true;
+            //
             layersUnderButtons = layer[row][column];
             layer[row][column] = layer[row][column] + 1;
-            if (arraySize == layer[row][column]/4)
+            //Find where max buttons are layed
+            if (arraySize == layer[row][column]/REPEAT)
             {
               buttonsMain[i][u].setEnabled(false);
             }
+            canvas.repaint(); 
           }
         }
       }
@@ -149,7 +167,12 @@ class StartingFrameO extends JFrame {
       System.out.println("Row" + (1+row)+ "Column" + (1+column));
       System.out.println(played);
     }
-  }
+  }//Button Listener Class
+  /* Graphics Panel
+   * @desc draw images on the buttons
+   * @author Charles Ahn
+   * @version March 3rd 2019
+   */
   static class GraphicsPanel extends JPanel 
   {
     int counter = 0;
@@ -161,12 +184,12 @@ class StartingFrameO extends JFrame {
     public void paintComponent(Graphics g) 
     { 
       super.paintComponent(g);
-      canvas.repaint(); 
+
       //Draw background image
-      g.drawImage(overlayGame,0,0,this);
+      g.drawImage(overlayGame,COORDINATEX,COORDINATEY,this);
       //Get layer number of the button
-      int x = layersUnderButtons/4;
-      //Draw chip + layer it is on MAIN PANEL
+      int x = layersUnderButtons/REPEAT;
+      //Drawing chip on the main panel
       if (played==true && computerTurn == true)
       {
         buttonsMain[row][column].setIcon(new ImageIcon("chip/chipCOMP" + (x+1) + ".png"));
@@ -175,37 +198,34 @@ class StartingFrameO extends JFrame {
       {
         buttonsMain[row][column].setIcon(new ImageIcon("chip/chipPLAYER" + (x+1) + ".png"));
       }
-      //FRONT PANEL
+      //North Panel
       if (played==true && row == arraySize-1 && computerTurn == true)
       {
-        //buttonsSide[bot>top][column][0]
-        buttonsSide[row-x][column][0].setIcon(new ImageIcon("chip/chipCOMP0.png"));
+        buttonsSide[row-x][column][ZERO].setIcon(new ImageIcon("chip/chipCOMP0.png"));
       }
       else if (played==true && computerTurn == false && row == arraySize-1)
       {
-        buttonsSide[row-x][column][0].setIcon(new ImageIcon("chip/chipPLAYER0.png"));
+        buttonsSide[row-x][column][ZERO].setIcon(new ImageIcon("chip/chipPLAYER0.png"));
       }
-      //WEST PANEL
-      if (played==true && column == 0 && computerTurn == true)
+      //West Panel
+      if (played==true && column == ZERO && computerTurn == true)
       {
-        //buttonsSide[array-column=row][column][0]
         buttonsSide[(arraySize-1)-column-x][row][1].setIcon(new ImageIcon("chip/chipCOMP0.png"));
       }
-      else if (played==true && computerTurn == false && column == 0)
+      else if (played==true && computerTurn == false && column == ZERO)
       {
         buttonsSide[(arraySize-1)-column-x][row][1].setIcon(new ImageIcon("chip/chipPLAYER0.png"));
       }
-      //BACK PANEL
-      //buttonsSide[array-row=row][column][0]
-      if (played==true && row == 0 && computerTurn == true)
+      //South display
+      if (played==true && row == ZERO && computerTurn == true)
       {
         buttonsSide[(arraySize-1)-row-x][(arraySize-1)-column][2].setIcon(new ImageIcon("chip/chipCOMP0.png"));
       }
-      else if (played==true && computerTurn == false && row == 0)
+      else if (played==true && computerTurn == false && row == ZERO)
       {
         buttonsSide[(arraySize-1)-row-x][(arraySize-1)-column][2].setIcon(new ImageIcon("chip/chipPLAYER0.png"));
       }
-      //EAST PANEL
+      //East panel
       if (played==true && column == arraySize-1 && computerTurn == true)
       {
         buttonsSide[column-x][(arraySize-1)-row][3].setIcon(new ImageIcon("chip/chipCOMP0.png"));
@@ -214,6 +234,6 @@ class StartingFrameO extends JFrame {
       {
         buttonsSide[column-x][(arraySize-1)-row][3].setIcon(new ImageIcon("chip/chipPLAYER0.png"));
       }
-    }
-  }
-}
+    }//Paint Component
+  }//Graphics Class
+}//StartingFrameFinal Class
