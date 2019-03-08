@@ -1,7 +1,7 @@
-/* Selection Sort method
+/* GameDisplay method
  * @desc displays button clicks, is ONLY a basic input/output display
  * @author Charles Ahn
- * @version March 03th 2019
+ * @version March 07th 2019
  */
 
 
@@ -19,7 +19,7 @@ import java.io.File;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-class StartingFrameFinal extends JFrame { 
+class GameDisplay extends JFrame { 
   //Declare Variables
   static final int ZERO = 0;
   static final int EXTERNALPANELS = 4;
@@ -27,10 +27,10 @@ class StartingFrameFinal extends JFrame {
   static final int COUNTERSTART = 0;
   static final int COORDINATEX = 0;
   static final int COORDINATEY = 0;
+  static final int ARRAYRESIZE = 10;
   static int panelNumber;
   static int row;
   static int column;
-  static int sizeBoxPixels;
   static int arraySize;
   static int layer[][];
   static int layersUnderButtons;
@@ -57,8 +57,7 @@ class StartingFrameFinal extends JFrame {
     ImageIcon img = new ImageIcon("coin.png");
     frame.setIconImage(img.getImage());
     //Setup array
-    arraySize = 10;
-    sizeBoxPixels = arraySize*50;
+    arraySize = ARRAYRESIZE;
     buttonForm = new JPanel();
     buttonForm.setLayout(new GridLayout(arraySize,arraySize));
     //Set up external panels
@@ -70,7 +69,7 @@ class StartingFrameFinal extends JFrame {
     //Setup height array tracker
     layer = new int[arraySize][arraySize];
     buttonDrawer();
-    //Load overlay image
+    //Load overlay image for the background
     try 
     {                
       overlayGame = ImageIO.read(new File("OverlayGame.png"));
@@ -78,30 +77,36 @@ class StartingFrameFinal extends JFrame {
     frame.add(canvas);
     frame.setVisible(true);
   }
+  /* Button Drawer Method
+   * @desc draws the button grid
+   * @author Charles Ahn
+   * @version March 07rd 2019
+   * @return a visual of the button grid
+   */
   public static void buttonDrawer()
   {
     //Button sizer
     buttonsMain = new JButton[arraySize][arraySize];
-    buttonsSide = new JButton[arraySize][arraySize][4];
+    buttonsSide = new JButton[arraySize][arraySize][EXTERNALPANELS];
     //Create button field
-    for(int f = 0; f < 4; f++) 
+    for(int f = COUNTERSTART; f < EXTERNALPANELS; f++) 
     {
-      for(int i = 0; i < arraySize; i++) 
+      for(int i = COUNTERSTART; i < arraySize; i++) 
       {
-        for(int u = 0; u < arraySize; u++) 
+        for(int u = COUNTERSTART; u < arraySize; u++) 
         {
           buttonsMain[i][u] = new JButton();
           buttonsSide[i][u][f] = new JButton();
-          layer[i][u] = 0;
+          layer[i][u] = COUNTERSTART;
         }
       }
     }
     //Draw Buttons
-    for (int j = 0; j < 4; j++)
+    for (int j = COUNTERSTART; j < EXTERNALPANELS; j++)
     {
-      for(int i = 0; i < arraySize; i++) 
+      for(int i = COUNTERSTART; i < arraySize; i++) 
       {
-        for(int u = 0; u < arraySize; u++) 
+        for(int u = COUNTERSTART; u < arraySize; u++) 
         {
           buttonForm.add(buttonsMain[i][u]);
           buttonsMain[i][u].setOpaque(true);
@@ -123,16 +128,17 @@ class StartingFrameFinal extends JFrame {
     viewForm[3].setBounds(1136,568,247,282);
     buttonForm.setVisible(true);
     canvas.add(buttonForm);
-    for (int d = 0; d < 4; d++)
+    //Set to visible
+    for (int d = COUNTERSTART; d < EXTERNALPANELS; d++)
     {
       canvas.add(viewForm[d]);
       viewForm[d].setVisible(true);
     }
-  }
+  }//ButtonDrawer Method
   /* Button Listener Class
-   * @desc sort words through  array from list of ten numbers
+   * @desc listens in on the clicks that are performed
    * @author Charles Ahn
-   * @version February 12th 2019
+   * @version March 07rd 2019
    * @param buttons
    * @return where clicks came from
    */
@@ -164,18 +170,16 @@ class StartingFrameFinal extends JFrame {
         }
       }
       canvas.repaint();
-      System.out.println("Row" + (1+row)+ "Column" + (1+column));
-      System.out.println(played);
-    }
+    }//action performed class
   }//Button Listener Class
   /* Graphics Panel
    * @desc draw images on the buttons
    * @author Charles Ahn
-   * @version March 3rd 2019
+   * @version March 07rd 2019
    */
   static class GraphicsPanel extends JPanel 
   {
-    int counter = 0;
+    int counter = ZERO;
     public GraphicsPanel()
     {
       setFocusable(true);

@@ -11,3 +11,38 @@ fileObjects = [C:\Users\charl\Desktop\ga,e\StartingFrameFinal.java]
 8 Mar 2019 3:44:26 GMT:  Kind = WARNING
 8 Mar 2019 3:44:26 GMT: Name = C:\Users\charl\Desktop\ga,e\StartingFrameFinal.java LineNo = 22 ColNo = 7 Msg = 'The serializable class StartingFrameFinal does not declare a static final serialVersionUID field of type long'
 8 Mar 2019 3:44:58 GMT: Log 'EclipseCompiler.txt' opened: 8 Mar 2019 3:44:58 GMT with name C:\Users\charl\Desktop\Game Display\EclipseCompiler.txt
+8 Mar 2019 3:59:55 GMT: Log 'EclipseCompiler.txt' opened: 8 Mar 2019 3:59:55 GMT with name C:\Users\charl\Desktop\Game Display\EclipseCompiler.txt
+8 Mar 2019 4:05:29 GMT: diagnostics = javax.tools.DiagnosticCollector@1d4bd1f
+fileManager = org.eclipse.jdt.internal.compiler.tool.EclipseFileManager@c12d81
+fileObjects = [C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java]
+8 Mar 2019 4:05:29 GMT: Calling 'org.eclipse.jdt.internal.compiler.tool.EclipseCompiler@126e11d' with options [-Xlint:deprecation, -Xlint:unchecked, -g, -classpath, C:\Users\charl\Desktop\Game Display;C:\Users\charl\Desktop\drjava-beta-20160913-225446.exe]
+8 Mar 2019 4:05:29 GMT: Compiler call returned
+8 Mar 2019 4:05:29 GMT: Processing diagnostic org.eclipse.jdt.internal.compiler.tool.EclipseCompilerImpl$3$2@7525e9
+8 Mar 2019 4:05:29 GMT:  Kind = WARNING
+8 Mar 2019 4:05:29 GMT: Name = C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java LineNo = 182 ColNo = 16 Msg = 'The serializable class GraphicsPanel does not declare a static final serialVersionUID field of type long'
+8 Mar 2019 4:05:29 GMT: Processing diagnostic org.eclipse.jdt.internal.compiler.tool.EclipseCompilerImpl$3$2@18fa4e5
+8 Mar 2019 4:05:29 GMT:  Kind = WARNING
+8 Mar 2019 4:05:29 GMT: Name = C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java LineNo = 22 ColNo = 7 Msg = 'The serializable class GameDisplay does not declare a static final serialVersionUID field of type long'
+8 Mar 2019 4:05:53 GMT: diagnostics = javax.tools.DiagnosticCollector@1345bc
+fileManager = org.eclipse.jdt.internal.compiler.tool.EclipseFileManager@1910729
+fileObjects = [C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java]
+8 Mar 2019 4:05:53 GMT: Calling 'org.eclipse.jdt.internal.compiler.tool.EclipseCompiler@37d563' with options [-Xlint:deprecation, -Xlint:unchecked, -g, -classpath, C:\Users\charl\Desktop\Game Display;C:\Users\charl\Desktop\drjava-beta-20160913-225446.exe]
+8 Mar 2019 4:05:53 GMT: Compiler call returned
+8 Mar 2019 4:05:53 GMT: Processing diagnostic org.eclipse.jdt.internal.compiler.tool.EclipseCompilerImpl$3$2@184d70d
+8 Mar 2019 4:05:53 GMT:  Kind = WARNING
+8 Mar 2019 4:05:53 GMT: Name = C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java LineNo = 180 ColNo = 16 Msg = 'The serializable class GraphicsPanel does not declare a static final serialVersionUID field of type long'
+8 Mar 2019 4:05:53 GMT: Processing diagnostic org.eclipse.jdt.internal.compiler.tool.EclipseCompilerImpl$3$2@2f05cd
+8 Mar 2019 4:05:53 GMT:  Kind = WARNING
+8 Mar 2019 4:05:53 GMT: Name = C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java LineNo = 22 ColNo = 7 Msg = 'The serializable class GameDisplay does not declare a static final serialVersionUID field of type long'
+8 Mar 2019 4:08:54 GMT: diagnostics = javax.tools.DiagnosticCollector@18bf7c8
+fileManager = org.eclipse.jdt.internal.compiler.tool.EclipseFileManager@1dec5f3
+fileObjects = [C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java]
+8 Mar 2019 4:08:54 GMT: Calling 'org.eclipse.jdt.internal.compiler.tool.EclipseCompiler@835dc5' with options [-Xlint:deprecation, -Xlint:unchecked, -g, -classpath, C:\Users\charl\Desktop\Game Display;C:\Users\charl\Desktop\drjava-beta-20160913-225446.exe]
+8 Mar 2019 4:08:55 GMT: Compiler call returned
+8 Mar 2019 4:08:55 GMT: Processing diagnostic org.eclipse.jdt.internal.compiler.tool.EclipseCompilerImpl$3$2@8f5fff
+8 Mar 2019 4:08:55 GMT:  Kind = WARNING
+8 Mar 2019 4:08:55 GMT: Name = C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java LineNo = 180 ColNo = 16 Msg = 'The serializable class GraphicsPanel does not declare a static final serialVersionUID field of type long'
+8 Mar 2019 4:08:55 GMT: Processing diagnostic org.eclipse.jdt.internal.compiler.tool.EclipseCompilerImpl$3$2@231b4b
+8 Mar 2019 4:08:55 GMT:  Kind = WARNING
+8 Mar 2019 4:08:55 GMT: Name = C:\Users\charl\Desktop\Game Display\StartingFrameFinal.java LineNo = 22 ColNo = 7 Msg = 'The serializable class GameDisplay does not declare a static final serialVersionUID field of type long'
+8 Mar 2019 4:09:11 GMT: Log 'EclipseCompiler.txt' opened: 8 Mar 2019 4:09:11 GMT with name C:\Users\charl\Desktop\Game Display\EclipseCompiler.txt
