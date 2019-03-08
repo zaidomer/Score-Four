@@ -1,5 +1,6 @@
 /**
  * ScoreFour class
+ * a 3d version of connect 4
  * Calls the Select Constructor
  * @author Zaid Omer
  * @version March 2019
