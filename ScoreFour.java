@@ -6,11 +6,7 @@
  * @version March 2019
  */
 
-import java.util.Scanner;
-import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 public class ScoreFour extends JFrame{
