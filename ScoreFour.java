@@ -144,6 +144,7 @@ class Select extends JFrame {
       // while loop and try catch error checking z coordinate input
       while(zCoordinate > gameBoard.length-1 || zCoordinate < 0){
         try{
+          // the z coordinate is looked at from the front side of the cube inwards, with the fromt beginning at 0
           zCoordinate = Integer.parseInt(JOptionPane.showInputDialog("Please enter the row (from a birds eye view) or Z coordinate of your move, between 0 and " + (gameBoardSize-1)));
         }catch(Exception e){
           JOptionPane.showMessageDialog(null, "Please enter an integer value within the indicated value.");
