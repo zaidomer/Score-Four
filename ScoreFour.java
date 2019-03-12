@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 
 public class ScoreFour extends JFrame{
   public static void main(String[] args) {
+
+    // call class
     new Select();
   }
 }
